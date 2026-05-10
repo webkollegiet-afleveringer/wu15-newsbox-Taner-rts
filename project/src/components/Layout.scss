@@ -1,0 +1,43 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  &__title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    /* Leave space so content is not hidden behind the fixed bottom nav */
+    padding-bottom: 74px;
+  }
+
+  &__nav {
+    position: fixed;
+    bottom: 0;
+    /* Stay centered inside the 430px app container */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    background: white;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0 16px;
+    z-index: 100;
+  }
+}

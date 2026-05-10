@@ -1,0 +1,21 @@
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-decoration: none;
+  color: #aaaaaa;       /* gray when not active */
+  font-size: 11px;
+  padding: 4px 18px;
+  transition: color 0.2s;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* When this link matches the current page, NavLink adds "active" class */
+  &.active {
+    color: var(--brand);  /* olive-green */
+  }
+}

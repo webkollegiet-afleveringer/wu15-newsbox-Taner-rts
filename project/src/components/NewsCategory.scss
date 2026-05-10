@@ -1,0 +1,45 @@
+.category {
+  border-bottom: 2px solid var(--border);
+
+  &__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  &__logo {
+    flex-shrink: 0;
+  }
+
+  &__name {
+    flex: 1;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.07em;
+    color: var(--text);
+  }
+
+  &__chevron {
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #555;
+    }
+  }
+
+  &__articles {
+    /* No extra padding – ArticleCard handles its own spacing */
+  }
+
+  &__status {
+    padding: 14px 16px;
+    color: var(--text-soft);
+    font-size: 14px;
+  }
+}

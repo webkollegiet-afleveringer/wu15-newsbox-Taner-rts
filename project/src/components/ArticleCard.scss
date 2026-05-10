@@ -1,0 +1,78 @@
+.article-card {
+  display: flex;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+
+  /* The main article area slides left when bookmarked */
+  &__main {
+    display: flex;
+    gap: 14px;
+    padding: 14px 16px;
+    flex: 1;
+    min-width: 0;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+  }
+
+  /* Gray placeholder rectangle for the article image */
+  &__image {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    background: #d0d0d0;
+    border-radius: 6px;
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+
+  &__description {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* The green bookmark panel hidden on the right */
+  &__bookmark {
+    background: var(--bookmark);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    flex-shrink: 0;
+
+    svg {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  /* When bookmarked: slide the content left and reveal the green button */
+  &--swiped {
+    .article-card__main {
+      transform: translateX(-70px);
+    }
+
+    .article-card__bookmark {
+      width: 70px;
+    }
+  }
+}
