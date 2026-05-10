@@ -10,13 +10,10 @@ export default function useCachedFetch(category) {
     const apiKey = "37VJxj2nXbj7HLrxGu88zsSuLBXkZznxlPN11qwMcC5njAjK"
     const endpoint = `https://api.nytimes.com/svc/news/v3/content/nyt/${category}.json?api-key=${apiKey}`;
     const response = await fetch(endpoint);
-    return response.json();
     if (!response.ok) {
-      throw new Error('Network response was not ok');
-  }
-
-  const jsonData = await response.json();
-  return json;
+      throw new Error(`Network response was not ok: ${response.status}`);
+    }
+    return response.json();
   }
 
 

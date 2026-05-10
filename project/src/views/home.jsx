@@ -25,10 +25,10 @@ export default function Home() {
   // error && console.log(error)
     return (
 <>
-{!healthPending && <Detail category="Health" articles={healthData.results} />}
-{!sportsPending && <Detail category="Sports" articles={sportsData.results} />}
-{!businessPending && <Detail category="Business" articles={businessData.results} />}
-{!travelPending && <Detail category="Travel" articles={travelData.results} />}
+{!healthPending && healthData && <Detail category="Health" articles={healthData.results} />}
+{!sportsPending && sportsData && <Detail category="Sports" articles={sportsData.results} />}
+{!businessPending && businessData && <Detail category="Business" articles={businessData.results} />}
+{!travelPending && travelData && <Detail category="Travel" articles={travelData.results} />}
 
 
 
