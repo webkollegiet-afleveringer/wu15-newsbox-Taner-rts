@@ -1,6 +1,7 @@
-import {useQuery} from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import useCachedFetch from '../hooks/useCachedFetch'
 import Detail from '../components/Detail'
+
 
 
 
@@ -10,30 +11,42 @@ import Detail from '../components/Detail'
 // //   return result
 // }
 export default function Home() {
-  const {data: healthData, isPending: healthPending, error: healthError} = useCachedFetch("health")
-  const {data: sportsData, isPending: sportsPending, error: sportsError} = useCachedFetch("sports")
-  const {data: businessData, isPending: businessPending, error: businessError} = useCachedFetch("business")
-  const {data: travelData, isPending: travelPending, error: travelError} = useCachedFetch("travel")
-  
 
-  console.log( sportsData)
-  console.log( sportsPending)
+  const showHealth = localStorage.getItem("health") || "true"
+  const showSports = localStorage.getItem("sports") || "true"
+  const showBusiness = localStorage.getItem("buisness") || "true"
+  const showTravel = localStorage.getItem("travel") || "true"
+
+
+  const { data: healthData, isPending: healthPending, error: healthError }
+    = showHealth === "true" ? useCachedFetch("health") : { data: null, isPending: false, error: null }
+  const { data: sportsData, isPending: sportsPending, error: sportsError }
+    = showSports === "true" ? useCachedFetch("sports") : { data: null, isPending: false, error: null }
+  const { data: businessData, isPending: businessPending, error: businessError }
+    = showBusiness === "true" ? useCachedFetch("business") : { data: null, isPending: false, error: null }
+
+  const { data: travelData, isPending: travelPending, error: travelError }
+    = showTravel === "true" ? useCachedFetch("travel") : { data: null, isPending: false, error: null }
+
+
+  console.log(sportsData)
+  console.log(sportsPending)
 
   // data && console.log( data)
 
 
   // error && console.log(error)
-    return (
-<>
-{!healthPending && healthData && <Detail category="Health" articles={healthData.results} />}
-{!sportsPending && sportsData && <Detail category="Sports" articles={sportsData.results} />}
-{!businessPending && businessData && <Detail category="Business" articles={businessData.results} />}
-{!travelPending && travelData && <Detail category="Travel" articles={travelData.results} />}
+  return (
+    <>
+      {showHealth === "true" && (!healthPending && healthData && <Detail category="Health" articles={healthData.results} />)}
+      {showSports === "true" && (!sportsPending && sportsData && <Detail category="Sports" articles={sportsData.results} />)}
+      {showBusiness === "true" && (!businessPending && businessData && <Detail category="Business" articles={businessData.results} />)}
+      {showTravel === "true" && (!travelPending && travelData && <Detail category="Travel" articles={travelData.results} />)}
 
 
 
-</>
-    )
+    </>
+  )
 }
 
 

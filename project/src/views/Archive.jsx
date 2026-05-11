@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import ArticleCard from '../components/ArticleCard'
-import './SimplePage.scss'
 
 function Archive() {
   const [bookmarkedArticles] = useState([
@@ -14,7 +13,7 @@ function Archive() {
       {bookmarkedArticles.length > 0 ? (
         <div>
           {bookmarkedArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
+            <ArticleCard key={article.id} article={article} action="delete" />
           ))}
         </div>
       ) : (

@@ -6,12 +6,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Layout from './components/Layout'
-// import { link } from 'react-router'
 
- export default function App() {
+export default function App() {
   const queryClient = new QueryClient();
-  // const {data, loading, error} = useCachedFetch('https://api.nytimes.com/svc/mostpopular/v2/emailed/7.json?api-key=QXAGgEjsqNQ1GJhRMxVJQLXCjK9c0PLhHt2HEiyDJGIO6zFo') 
-  // data && console.log('data', data)
+
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -28,6 +26,14 @@ import Layout from './components/Layout'
     </QueryClientProvider>
   )
 }
+
+
+
+
+
+
+
+
 
 
 
