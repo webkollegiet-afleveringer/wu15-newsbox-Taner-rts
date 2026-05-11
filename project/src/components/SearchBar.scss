@@ -1,0 +1,29 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 16px;
+  padding: 10px 14px;
+  background: var(--gray-bg);
+  border-radius: 10px;
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    color: #aaa;
+    flex-shrink: 0;
+  }
+
+  &__input {
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    color: var(--text);
+    width: 100%;
+    outline: none;
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+}
