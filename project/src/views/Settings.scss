@@ -53,11 +53,11 @@
     width: 0;
     height: 0;
 
-    &:checked + .slider {
+    &:checked+.slider {
       background: var(--bookmark);
     }
 
-    &:checked + .slider:before {
+    &:checked+.slider:before {
       transform: translateX(18px);
     }
   }
