@@ -3,12 +3,6 @@ import useCachedFetch from '../hooks/useCachedFetch'
 import Detail from '../components/Detail'
 
 
-
-
-// // async function fetchHome() {
-// //   let result = fetch("https://api.nytimes.com/svc/mostpopular/v2/emailed/7.json?api-key=QXAGgEjsqNQ1GJhRMxVJQLXCjK9c0PLhHt2HEiyDJGIO6zFo")
-// //   return result
-// }
 export default function Home() {
 
   const showHealth = localStorage.getItem("health") || "true"
