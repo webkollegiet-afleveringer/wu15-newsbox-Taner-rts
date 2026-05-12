@@ -3,7 +3,6 @@ import './Settings.scss'
 import NewsifyIcon from '../components/icons/newsify-icon'
 
 const CATEGORIES = [
-  { key: 'europe', label: 'EUROPE' },
   { key: 'health', label: 'HEALTH' },
   { key: 'sports', label: 'SPORT' },
   { key: 'business', label: 'BUSINESS' },

@@ -7,7 +7,7 @@ export default function ArticleCard({ article, action = "bookmark", onRemove }) 
   const [isSwiped, setIsSwiped] = useState(false)
   const touchMoved = useRef(false)
 
-  // --- Touch events (mobile) ---
+  //  Touch events 
   function handleTouchStart(event) {
     setStartX(event.touches[0].clientX)
     touchMoved.current = false
@@ -28,7 +28,7 @@ export default function ArticleCard({ article, action = "bookmark", onRemove }) 
     }
   }
 
-  // --- Mouse click (desktop) ---
+  //  Mouse click
   function handleClick() {
     // No swipe action for "none" mode
     if (action === "none") return
@@ -46,7 +46,7 @@ export default function ArticleCard({ article, action = "bookmark", onRemove }) 
     }
   }
 
-  // --- Bookmark / delete button ---
+  // Bookmark / delete button
   function handleAction() {
     if (action === "bookmark") {
       const archive = JSON.parse(localStorage.getItem("archive") || "[]")
@@ -83,6 +83,7 @@ export default function ArticleCard({ article, action = "bookmark", onRemove }) 
           </svg>
         )}
       </button>
+
       )}
       <article
         ref={articleRef}

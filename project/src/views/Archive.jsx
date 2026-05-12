@@ -12,7 +12,6 @@ function Archive() {
     localStorage.setItem("archive", JSON.stringify(updated))
   }
 
-  // Group articles by their section/category
   const grouped = {}
   for (const article of articles) {
     const cat = (article.section || 'saved').toUpperCase()
