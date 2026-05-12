@@ -1,25 +1,68 @@
-import React, { useEffect, useRef } from 'react';
+import { useState } from 'react'
+import './Settings.scss'
+import NewsifyIcon from '../components/icons/newsify-icon'
+
+const CATEGORIES = [
+  { key: 'europe', label: 'EUROPE' },
+  { key: 'health', label: 'HEALTH' },
+  { key: 'sports', label: 'SPORT' },
+  { key: 'business', label: 'BUSINESS' },
+  { key: 'travel', label: 'TRAVEL' },
+]
 
 export default function Settings() {
+  const [toggles, setToggles] = useState(() => {
+    const result = {}
+    for (const cat of CATEGORIES) {
+      result[cat.key] = localStorage.getItem(cat.key) !== "false"
+    }
+    return result
+  })
 
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('darkMode') === 'true'
+  })
 
-  const showHealth = localStorage.getItem("health") || "true"
-  const showSports = localStorage.getItem("sports") || "true"
-  const showBusiness = localStorage.getItem("buisness") || "true"
-  const showTravel = localStorage.getItem("travel") || "true"
+  function handleToggle(key) {
+    const newValue = !toggles[key]
+    setToggles({ ...toggles, [key]: newValue })
+    localStorage.setItem(key, String(newValue))
+  }
 
-  function inputHandler(event) {
-    localStorage.setItem(event.target.dataset.category, event.target.checked);
+  function toggleDarkMode() {
+    const next = !darkMode
+    setDarkMode(next)
+    document.body.classList.toggle('dark-mode', next)
+    localStorage.setItem('darkMode', String(next))
   }
 
   return (
-    <>
+    <div className="settings">
+      <h1 className="settings__title">Settings</h1>
+      <p className="settings__subtitle">Categories</p>
 
-      <h1>Settings</h1>
-      <p>Health <input type="checkbox" data-category="health" onInput={inputHandler} defaultChecked={showHealth === "true"} /></p>
-      <p>Sports <input type="checkbox" data-category="sports" onInput={inputHandler} defaultChecked={showSports === "true"} /></p>
-      <p>Business <input type="checkbox" data-category="business" onInput={inputHandler} defaultChecked={showBusiness === "true"} /></p>
-      <p>Travel <input type="checkbox" data-category="travel" onInput={inputHandler} defaultChecked={showTravel === "true"} /></p>
-    </>
-  );
+      <div className="settings__list">
+        {CATEGORIES.map((cat) => (
+          <div className="settings__item" key={cat.key}>
+            <NewsifyIcon />
+            <span className="settings__item-name">{cat.label}</span>
+            <label className="toggle-switch">
+              <input
+                type="checkbox"
+                checked={toggles[cat.key]}
+                onChange={() => handleToggle(cat.key)}
+              />
+              <span className="slider"></span>
+            </label>
+          </div>
+        ))}
+      </div>
+
+      <button className="dark-mode-btn" onClick={toggleDarkMode}>
+        Toggle dark mode
+      </button>
+
+      <p className="settings__version">Version 4.8.15.16.23.42</p>
+    </div>
+  )
 }

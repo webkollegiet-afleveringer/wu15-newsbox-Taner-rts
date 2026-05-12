@@ -37,6 +37,16 @@ body {
   /* gray page background outside the app */
 }
 
+body.dark-mode {
+  background: #1a1a1a;
+
+  --text: #f0f0f0;
+  --text-soft: #aaaaaa;
+  --bg: #242424;
+  --border: #3a3a3a;
+  --gray-bg: #2e2e2e;
+}
+
 #root {
   /* Center the app and give it a phone-like width */
   max-width: 430px;

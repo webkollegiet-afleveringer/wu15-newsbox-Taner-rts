@@ -1,23 +1,41 @@
 import { useState } from 'react'
-import ArticleCard from '../components/ArticleCard'
+import Detail from '../components/Detail'
 
 function Archive() {
-  const [bookmarkedArticles] = useState([
-    { id: '1', webTitle: 'Health benefits of walking daily', fields: { trailText: 'Walking 30 minutes daily can improve heart health and mental wellness.' } },
-    { id: '4', webTitle: 'Football team wins championship', fields: { trailText: 'The underdog team beats the favorites in an exciting final match.' } },
-  ])
+  const [articles, setArticles] = useState(() => {
+    return JSON.parse(localStorage.getItem("archive") || "[]")
+  })
+
+  function handleRemove(article) {
+    const updated = articles.filter((a) => a.url !== article.url)
+    setArticles(updated)
+    localStorage.setItem("archive", JSON.stringify(updated))
+  }
+
+  // Group articles by their section/category
+  const grouped = {}
+  for (const article of articles) {
+    const cat = (article.section || 'saved').toUpperCase()
+    if (!grouped[cat]) grouped[cat] = []
+    grouped[cat].push(article)
+  }
 
   return (
-    <div className="simple-page">
-      <h2>Archive</h2>
-      {bookmarkedArticles.length > 0 ? (
-        <div>
-          {bookmarkedArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} action="delete" />
-          ))}
-        </div>
+    <div>
+      {articles.length === 0 ? (
+        <p style={{ padding: '20px', color: '#666' }}>
+          Your saved articles will appear here.
+        </p>
       ) : (
-        <p>Your saved articles will appear here.</p>
+        Object.entries(grouped).map(([cat, arts]) => (
+          <Detail
+            key={cat}
+            category={cat}
+            articles={arts}
+            action="delete"
+            onRemove={handleRemove}
+          />
+        ))
       )}
     </div>
   )

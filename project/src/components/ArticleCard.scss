@@ -40,8 +40,13 @@
   display: flex;
   flex-direction: row;
   gap: 12px;
-  align-items: flex-start;
-  padding: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 
   img {
     width: 80px;
@@ -57,18 +62,23 @@
   }
 
   &__heading {
-    font-size: 1em;
-    height: 1em;
+    font-size: 0.95em;
+    font-weight: 700;
+    margin-bottom: 5px;
     display: -webkit-box;
-    line-clamp: 1;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
     -webkit-box-orient: vertical;
   }
 
   &__abstract {
-    font-size: 1em;
-    height: 2.7em;
+    font-size: 0.85em;
+    color: #555;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
     line-clamp: 2;
     overflow: hidden;
+    -webkit-box-orient: vertical;
   }
 }

@@ -21,7 +21,6 @@ export default function Layout() {
           <NewsifyIcon />
           Newsify
         </Link>
-        {location.pathname === '/' && <p>Søgebar</p>}
       </header>
       <main className="layout__content">
         <Outlet />

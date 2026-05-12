@@ -1,114 +1,36 @@
-import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 import useCachedFetch from '../hooks/useCachedFetch'
 import Detail from '../components/Detail'
+import SearchBar from '../components/SearchBar'
 
-
-
-
-
-// // async function fetchHome() {
-// //   let result = fetch("https://api.nytimes.com/svc/mostpopular/v2/emailed/7.json?api-key=QXAGgEjsqNQ1GJhRMxVJQLXCjK9c0PLhHt2HEiyDJGIO6zFo")
-// //   return result
-// }
 export default function Home() {
+  const [search, setSearch] = useState('')
 
-  const showHealth = localStorage.getItem("health") || "true"
-  const showSports = localStorage.getItem("sports") || "true"
-  const showBusiness = localStorage.getItem("buisness") || "true"
-  const showTravel = localStorage.getItem("travel") || "true"
+  const showHealth = localStorage.getItem("health") !== "false"
+  const showSports = localStorage.getItem("sports") !== "false"
+  const showBusiness = localStorage.getItem("business") !== "false"
+  const showTravel = localStorage.getItem("travel") !== "false"
 
+  const { data: healthData, isPending: healthPending } = useCachedFetch("health")
+  const { data: sportsData, isPending: sportsPending } = useCachedFetch("sports")
+  const { data: businessData, isPending: businessPending } = useCachedFetch("business")
+  const { data: travelData, isPending: travelPending } = useCachedFetch("travel")
 
-  const { data: healthData, isPending: healthPending, error: healthError }
-    = showHealth === "true" ? useCachedFetch("health") : { data: null, isPending: false, error: null }
-  const { data: sportsData, isPending: sportsPending, error: sportsError }
-    = showSports === "true" ? useCachedFetch("sports") : { data: null, isPending: false, error: null }
-  const { data: businessData, isPending: businessPending, error: businessError }
-    = showBusiness === "true" ? useCachedFetch("business") : { data: null, isPending: false, error: null }
-
-  const { data: travelData, isPending: travelPending, error: travelError }
-    = showTravel === "true" ? useCachedFetch("travel") : { data: null, isPending: false, error: null }
-
-
-  console.log(sportsData)
-  console.log(sportsPending)
-
-  // data && console.log( data)
-
-
-  // error && console.log(error)
   return (
-    <>
-      {showHealth === "true" && (!healthPending && healthData && <Detail category="Health" articles={healthData.results} />)}
-      {showSports === "true" && (!sportsPending && sportsData && <Detail category="Sports" articles={sportsData.results} />)}
-      {showBusiness === "true" && (!businessPending && businessData && <Detail category="Business" articles={businessData.results} />)}
-      {showTravel === "true" && (!travelPending && travelData && <Detail category="Travel" articles={travelData.results} />)}
-
-
-
-    </>
+    <div>
+      <SearchBar value={search} onChange={setSearch} />
+      {showHealth && !healthPending && healthData && (
+        <Detail category="HEALTH" articles={healthData.results} search={search} />
+      )}
+      {showSports && !sportsPending && sportsData && (
+        <Detail category="SPORT" articles={sportsData.results} search={search} />
+      )}
+      {showBusiness && !businessPending && businessData && (
+        <Detail category="BUSINESS" articles={businessData.results} search={search} />
+      )}
+      {showTravel && !travelPending && travelData && (
+        <Detail category="TRAVEL" articles={travelData.results} search={search} />
+      )}
+    </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { useState } from 'react'
-// import SearchBar from '../components/SearchBar'
-// import NewsCategory from '../components/NewsCategory'
-// import './Home.scss'
-
-// // The three news categories shown on the home page.
-// // Each one gets its own useCachedFetch call inside NewsCategory.
-// const CATEGORIES = [
-//   { name: 'HEALTH',  section: 'lifeandhealth', initiallyOpen: true  },
-//   { name: 'SPORT',   section: 'sport',          initiallyOpen: false },
-//   { name: 'TRAVEL',  section: 'travel',         initiallyOpen: true  },
-// ]
-
-// function Home() {
-//   // search state is shared across all categories so filtering works globally
-//   const [search, setSearch] = useState('')
-
-//   return (
-//     <div className="home">
-//       {/* SearchBar updates the search state when the user types */}
-//       <SearchBar value={search} onChange={setSearch} />
-
-//       {/* Each category renders its own list of articles */}
-//       {CATEGORIES.map((cat) => (
-//         <NewsCategory
-//           key={cat.name}
-//           name={cat.name}
-//           section={cat.section}
-//           initiallyOpen={cat.initiallyOpen}
-//           search={search}
-//         />
-//       ))}
-//     </div>
-//   )
-// }
-
-// export default Home
